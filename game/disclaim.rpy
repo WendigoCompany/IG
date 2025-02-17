@@ -1,22 +1,7 @@
-# init -3 python:
-#     from functions import disclaimed
-#     # from functions import disclaimed
-#     # disclaimedval = disclaimed("r")
-#     disclaimed_bool_py = disclaimed()
-#     disclaimed_func_py = disclaimed
-#     if renpy.game.preferences.language is None:
-#         renpy.game.preferences.language = "en"
-#         renpy.save_persistent()
-#     lang_py = renpy.game.preferences.language
-    
-
 init python:
     from game.game_modules.permanent import update_permanent
     lang = renpy.game.preferences.language
     
-# define lang = lang_py
-# define disclaimed_bool = disclaimed_bool_py
-# define disclaimed_func = disclaimed_func_py
 
 label en_disclaim:
     $ renpy.pause(2)
@@ -73,3 +58,10 @@ label splashscreen:
 
 
 
+    # vbox :   
+    #     imagebutton:
+    #         xpos 100
+    #         ypos 100
+    #         idle "images/img1.png" 
+    #         hover "images/img2.png" 
+    #         action "sad"
