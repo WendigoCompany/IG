@@ -1,0 +1,8 @@
+.vscode/
+*.save
+game/audio/*
+userman/
+errors.txt
+log.txt
+traceback.txt
+__pycache__/
