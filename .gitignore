@@ -6,7 +6,4 @@ errors.txt
 log.txt
 traceback.txt
 __pycache__/
-/game/girls/*
-!/game/girls/girls.py
-*_girl.rpy
 templates/
