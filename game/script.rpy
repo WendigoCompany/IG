@@ -5,7 +5,7 @@
 
 init python:
     from game.girls.girls import girls_db
-
+    from game.pymodules.store_data import get_store , new_game
 
 define e = Character("Eileen")
 
@@ -13,7 +13,8 @@ define e = Character("Eileen")
 # The game starts here.
 
 label start:
-
+    $ new_game()
+    
     # # Show a background. This uses a placeholder by default, but you can
     # # add a file (named either "bg room.png" or "bg room.jpg") to the
     # # images directory to show it.
@@ -31,7 +32,7 @@ label start:
     # e "You've created a new Ren'Py game."
 
     # e "Once you add a story, pictures, and music, you can release it to the world!"
-
+    
 
     jump main
 
