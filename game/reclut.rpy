@@ -46,11 +46,11 @@ init python:
     def recl_positon(i, pos):
         if pos == "y":
             base = -(i * 200)
-            y = base + 31
+            y = base + 31 + 100
             y += (i // max_per_col) * 215 
             return y
         elif pos == "x":
-            base = 0
+            base = 0 + 300
             x = base + 44
             x += ((i) % 3) *215
             return x
@@ -67,7 +67,8 @@ screen girl_prev(index):
         text girls_db[index]["s_pre_desc"][lang]
 
 screen reclut_shop:
-    add "/assets/reclutamiento.png"
+    add "/assets/reclutamiento_final3.png" xpos 300 ypos 100
+    # add "/assets/reclutamiento.png" xpos 300 ypos 100
     $ g_visible = filtrate_recl_girls()
     vbox:
         for i,g  in enumerate(g_visible):
@@ -83,34 +84,34 @@ screen reclut_shop:
                     hover image_hov
 
     vbox:
-        $ btn = im.Scale("images/assets/flecha_next.png" , 200, 50)
-        $ btn_hov = im.Scale("images/assets/flecha_next_hover.png" , 200, 50)
+        $ btn = im.Scale("images/assets/flecha_next2.png" , 200, 50)
+        $ btn_hov = im.Scale("images/assets/flecha_next_hover2.png" , 200, 50)
         imagebutton:
             idle btn
             hover btn_hov
-            ypos 697
-            xpos 474
+            ypos 697 + 100
+            xpos 474 + 300
             action Function(reclut_shop_next_page)
 
 
     vbox:
-        $ btn = im.Scale("images/assets/menu.png" , 200, 50)
-        $ btn_hov = im.Scale("images/assets/menu_hover.png" , 200, 50)
+        $ btn = im.Scale("images/assets/menu2.png" , 200, 50)
+        $ btn_hov = im.Scale("images/assets/menu_hover2.png" , 200, 50)
         imagebutton:
             idle btn
             hover btn_hov
-            ypos 697
-            xpos 259
+            ypos 697 + 100
+            xpos 259 + 300
             action Function(reclut_shop_prev_page)
 
     vbox:
-        $ btn = im.Scale("images/assets/flecha_prev.png" , 200, 50)
-        $ btn_hov = im.Scale("images/assets/flecha_prev_hover.png" , 200, 50)
+        $ btn = im.Scale("images/assets/flecha_prev2.png" , 200, 50)
+        $ btn_hov = im.Scale("images/assets/flecha_prev_hover2.png" , 200, 50)
         imagebutton:
             idle btn
             hover btn_hov
-            ypos 697
-            xpos 44
+            ypos 697 + 100
+            xpos 44 + 300
             action Function(reclut_shop_prev_page)
             
 
