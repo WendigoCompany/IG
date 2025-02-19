@@ -7,10 +7,28 @@ init python:
     actual_page= SimpleVars()
 
 
+    def compare_girls_unlocked():
+        g_filtrated = []
+        for g in girls_db:
+            if not g["id"] in (get_store("g_unlocked")):
+                g_filtrated.append(g)
+        return g_filtrated
+
+    def filtrate_recl_girls():
+        arr = []
+        for  i,g in enumerate(compare_girls_unlocked()):
+            if i // max_per_page == actual_page.v: 
+                arr.append(g)
+        return arr
+
     def reclut_shop_next_page():
         # Show("girl_prev")
         newval = actual_page.v + 1
-        if (len(girls_db) // max_per_page)  >= newval: 
+        to_dism = 0
+        compared = len(compare_girls_unlocked())
+        if compared % max_per_page == 0.0:
+            to_dism = 1
+        if (compared // max_per_page) - to_dism  >= newval: 
             actual_page.setload(newval)
             Show("reclut_shop")
 
@@ -21,8 +39,9 @@ init python:
             Show("reclut_shop")
 
 
-    def girl_hovered(index):
-        Show("girl_prev")
+    def recl_show_girl_info(index):
+        print("LA WAFLE SELECCIONADA ES: ", index)
+        # Show("girl_prev")
     
     def recl_positon(i, pos):
         if pos == "y":
@@ -30,6 +49,11 @@ init python:
             y = base + 31
             y += (i // max_per_col) * 215 
             return y
+        elif pos == "x":
+            base = 0
+            x = base + 44
+            x += ((i) % 3) *215
+            return x
 
 
 style tx_button:
@@ -44,27 +68,19 @@ screen girl_prev(index):
 
 screen reclut_shop:
     add "/assets/reclutamiento.png"
-    $ g_visible = []
-    for i,g in enumerate(girls_db):
-        $ print(get_store("g_unlocked"))
-        if not g["id"] in (get_store("g_unlocked")) and i // max_per_page == actual_page.v: 
-            $ g_visible.append(g)
+    $ g_visible = filtrate_recl_girls()
     vbox:
         for i,g  in enumerate(g_visible):
-
             $ image = im.Scale("images/profiles/" + g["reclut"]["s_pre_img"][0], 200, 200)
             $ image_hov = im.Scale("images/profiles/" + g["reclut"]["s_pre_img"][1], 200, 200)
             vbox:
                 box_wrap True
                 imagebutton:
                     idle image
-                    action Function(reclut_shop_prev_page)
+                    action Function(recl_show_girl_info, g["id"])
                     ypos recl_positon(i, "y")
-                    xpos 0
+                    xpos recl_positon(i, "x")
                     hover image_hov
-                    # hovered Function(girl_hovered, i)
-                # imagebutton auto "images/profiles/" + g["s_pre_img"] action "ASD"
-
 
     vbox:
         $ btn = im.Scale("images/assets/flecha_next.png" , 200, 50)
