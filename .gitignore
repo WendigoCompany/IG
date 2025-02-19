@@ -10,4 +10,3 @@ __pycache__/
 !/game/girls/girls.py
 *_girl.rpy
 templates/
-*.png
