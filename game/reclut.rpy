@@ -65,11 +65,6 @@ style tx_button:
     # font "KGSorryNotSorryChub.ttf"
 
 define g_visible =[]
-
-screen girl_prev(index=[-1]):
-    $ marco = im.Scale("/assets/marco_preview.png", 300, 300)
-    add marco xpos 200 ypos 200
-
 screen reclut_shop(preview=False):
     add "/assets/reclutamiento_final3.png" xpos 300 ypos 100
     # add "/assets/reclutamiento.png" xpos 300 ypos 100
@@ -154,7 +149,14 @@ screen reclut_shop(preview=False):
                 xpos 1045 +77*2+77*2
                 ypos 129 + 10
                 action Function(recl_update_preview,2)
-            
+          
+image bg reclutamiento_bg1 = "/menu_backgrounds/bg_reclutamiento.png"
+image bg reclutamiento_bg2 = "/menu_backgrounds/bg_reclutamiento_2.png"
+
 label reclut:
+    show bg reclutamiento_bg1 with dissolve
+    $ renpy.pause(.2)
+    show bg reclutamiento_bg2 with dissolve
+    $ renpy.pause(.2)
     $ actual_page.setload(0)
-    call screen reclut_shop
+    call screen reclut_shop with dissolve

@@ -34,7 +34,7 @@ label start:
     # e "Once you add a story, pictures, and music, you can release it to the world!"
     
 
-    jump main
+    jump mm_lab
 
     # This ends the game.
 
