@@ -1,12 +1,12 @@
 init python:
-    from game.pymodules.moduleClasses import SimpleVars
+    from game.pymodules.moduleClasses import SimpleVars, l_filter
     from game.girls.girls import girls_db
     
     max_per_page= 9
     max_per_col= 3
     actual_page= SimpleVars()
-
-
+    previewed_girl =SimpleVars()
+    previewed_girl.v =[-1]
     def compare_girls_unlocked():
         g_filtrated = []
         for g in girls_db:
@@ -22,7 +22,6 @@ init python:
         return arr
 
     def reclut_shop_next_page():
-        # Show("girl_prev")
         newval = actual_page.v + 1
         to_dism = 0
         compared = len(compare_girls_unlocked())
@@ -39,9 +38,13 @@ init python:
             Show("reclut_shop")
 
 
+    def recl_update_preview(ind):
+        previewed_girl.setload([previewed_girl.v[0],ind])
+        Show("reclut_shop", True)
+
     def recl_show_girl_info(index):
-        print("LA WAFLE SELECCIONADA ES: ", index)
-        # Show("girl_prev")
+        previewed_girl.setload([index,0])
+        Show("reclut_shop", True)
     
     def recl_positon(i, pos):
         if pos == "y":
@@ -61,15 +64,18 @@ style tx_button:
     size 10
     # font "KGSorryNotSorryChub.ttf"
 
+define g_visible =[]
 
-screen girl_prev(index):
-    vbox:
-        text girls_db[index]["s_pre_desc"][lang]
+screen girl_prev(index=[-1]):
+    $ marco = im.Scale("/assets/marco_preview.png", 300, 300)
+    add marco xpos 200 ypos 200
 
-screen reclut_shop:
+screen reclut_shop(preview=False):
     add "/assets/reclutamiento_final3.png" xpos 300 ypos 100
     # add "/assets/reclutamiento.png" xpos 300 ypos 100
-    $ g_visible = filtrate_recl_girls()
+    if not preview:
+        $ g_visible = filtrate_recl_girls()
+    
     vbox:
         for i,g  in enumerate(g_visible):
             $ image = im.Scale("images/profiles/" + g["reclut"]["s_pre_img"][0], 200, 200)
@@ -113,11 +119,42 @@ screen reclut_shop:
             ypos 697 + 100
             xpos 44 + 300
             action Function(reclut_shop_prev_page)
-            
+        
+    $ marco = im.Scale("/assets/marco_preview.png", 460, 460)
+    add marco xpos 1046 ypos 214
+    if not previewed_girl.v[0] == -1:
+        
+        $ girl_preview = im.Scale("/profiles/" + (l_filter(girls_db,previewed_girl.v[0] , "id", i))["v"]["reclut"]["preview"][previewed_girl.v[1]], 440, 440)
+        add girl_preview xpos 1056 ypos 230
 
+        vbox:
+            $ btn = im.Scale("images/assets/cloth.png" , 77*2, 60)
+            $ btn_hov = im.Scale("images/assets/cloth_hover.png" , 77*2, 60)
+            imagebutton:
+                idle btn
+                hover btn_hov
+                xpos 1045 
+                ypos 129 + 10
+                action Function(recl_update_preview,0)
+        vbox:
+            $ btn = im.Scale("images/assets/under.png" , 77*2, 60)
+            $ btn_hov = im.Scale("images/assets/under_hover.png" , 77*2, 60)
+            imagebutton:
+                idle btn
+                hover btn_hov   
+                xpos 1045 +77*2
+                ypos 129 + 10
+                action Function(recl_update_preview,1)
+        vbox:
+            $ btn = im.Scale("images/assets/nude.png" , 77*2, 60)
+            $ btn_hov = im.Scale("images/assets/nude_hover.png" , 77*2, 60)
+            imagebutton:
+                idle btn
+                hover btn_hov
+                xpos 1045 +77*2+77*2
+                ypos 129 + 10
+                action Function(recl_update_preview,2)
             
-            
-
 label reclut:
     $ actual_page.setload(0)
     call screen reclut_shop
