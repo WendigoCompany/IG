@@ -66,7 +66,7 @@ style tx_button:
 
 define g_visible =[]
 screen reclut_shop(preview=False):
-    add "/assets/reclutamiento_final3.png" xpos 300 ypos 100
+    add "/assets/reclutamiento4.png" xpos 300 ypos 100
     # add "/assets/reclutamiento.png" xpos 300 ypos 100
     if not preview:
         $ g_visible = filtrate_recl_girls()
@@ -85,8 +85,8 @@ screen reclut_shop(preview=False):
                     hover image_hov
 
     vbox:
-        $ btn = im.Scale("images/assets/flecha_next2.png" , 200, 50)
-        $ btn_hov = im.Scale("images/assets/flecha_next_hover2.png" , 200, 50)
+        $ btn = im.Scale("images/assets/flecha_next3.png" , 200, 50)
+        $ btn_hov = im.Scale("images/assets/flecha_next_hover3.png" , 200, 50)
         imagebutton:
             idle btn
             hover btn_hov
@@ -96,8 +96,8 @@ screen reclut_shop(preview=False):
 
 
     vbox:
-        $ btn = im.Scale("images/assets/menu2.png" , 200, 50)
-        $ btn_hov = im.Scale("images/assets/menu_hover2.png" , 200, 50)
+        $ btn = im.Scale("images/assets/menu3.png" , 200, 50)
+        $ btn_hov = im.Scale("images/assets/menu_hover3.png" , 200, 50)
         imagebutton:
             idle btn
             hover btn_hov
@@ -106,8 +106,8 @@ screen reclut_shop(preview=False):
             action Function(Jump_To, "mm_lab")
 
     vbox:
-        $ btn = im.Scale("images/assets/flecha_prev2.png" , 200, 50)
-        $ btn_hov = im.Scale("images/assets/flecha_prev_hover2.png" , 200, 50)
+        $ btn = im.Scale("images/assets/flecha_prev3.png" , 200, 50)
+        $ btn_hov = im.Scale("images/assets/flecha_prev_hover3.png" , 200, 50)
         imagebutton:
             idle btn
             hover btn_hov
@@ -115,7 +115,7 @@ screen reclut_shop(preview=False):
             xpos 44 + 300
             action Function(reclut_shop_prev_page)
         
-    $ marco = im.Scale("/assets/marco_preview.png", 460, 460)
+    $ marco = im.Scale("/assets/marco_preview2.png", 460, 460)
     add marco xpos 1046 ypos 214
     if not previewed_girl.v[0] == -1:
         
@@ -123,8 +123,8 @@ screen reclut_shop(preview=False):
         add girl_preview xpos 1056 ypos 230
 
         vbox:
-            $ btn = im.Scale("images/assets/cloth.png" , 77*2, 60)
-            $ btn_hov = im.Scale("images/assets/cloth_hover.png" , 77*2, 60)
+            $ btn = im.Scale("images/assets/cloth3.png" , 77*2, 60)
+            $ btn_hov = im.Scale("images/assets/cloth_hover3.png" , 77*2, 60)
             imagebutton:
                 idle btn
                 hover btn_hov
@@ -132,8 +132,8 @@ screen reclut_shop(preview=False):
                 ypos 129 + 10
                 action Function(recl_update_preview,0)
         vbox:
-            $ btn = im.Scale("images/assets/under.png" , 77*2, 60)
-            $ btn_hov = im.Scale("images/assets/under_hover.png" , 77*2, 60)
+            $ btn = im.Scale("images/assets/under3.png" , 77*2, 60)
+            $ btn_hov = im.Scale("images/assets/under_hover3.png" , 77*2, 60)
             imagebutton:
                 idle btn
                 hover btn_hov   
@@ -141,8 +141,8 @@ screen reclut_shop(preview=False):
                 ypos 129 + 10
                 action Function(recl_update_preview,1)
         vbox:
-            $ btn = im.Scale("images/assets/nude.png" , 77*2, 60)
-            $ btn_hov = im.Scale("images/assets/nude_hover.png" , 77*2, 60)
+            $ btn = im.Scale("images/assets/nude3.png" , 77*2, 60)
+            $ btn_hov = im.Scale("images/assets/nude_hover3.png" , 77*2, 60)
             imagebutton:
                 idle btn
                 hover btn_hov
