@@ -1,6 +1,6 @@
 init python:
     from game.pymodules.moduleClasses import SimpleVars, l_filter
-    from game.girls.functions import compare_girls_unlocked
+    from game.girls.functions import compare_girls_locked
 
     max_per_page= 9
     max_per_col= 3
@@ -9,7 +9,7 @@ init python:
     
     def filtrate_recl_girls():
         arr = []
-        for  i,g in enumerate(compare_girls_unlocked()):
+        for  i,g in enumerate(compare_girls_locked()):
             if i // max_per_page == actual_page.v: 
                 arr.append(g)
         return arr
@@ -17,7 +17,7 @@ init python:
     def reclut_shop_next_page():
         newval = actual_page.v + 1
         to_dism = 0
-        compared = len(compare_girls_unlocked())
+        compared = len(compare_girls_locked())
         if compared % max_per_page == 0.0:
             to_dism = 1
         if (compared // max_per_page) - to_dism  >= newval: 
