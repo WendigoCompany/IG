@@ -6,9 +6,15 @@
 init python:
     from game.girls.girls import girls_db
     from game.pymodules.store_data import get_store , new_game
+    from game.pymodules.moduleClasses import SimpleVars
+
+    def Jump_To(lab):
+        jump_to.setload(lab)
+        return ""
 
 define e = Character("Eileen")
 
+define jump_to = SimpleVars()
 
 # The game starts here.
 
@@ -35,6 +41,7 @@ label start:
     
 
     jump mm_lab
+    # jump reclut
 
     # This ends the game.
 

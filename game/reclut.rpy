@@ -103,7 +103,7 @@ screen reclut_shop(preview=False):
             hover btn_hov
             ypos 697 + 100
             xpos 259 + 300
-            action Function(reclut_shop_prev_page)
+            action Function(Jump_To, "mm_lab")
 
     vbox:
         $ btn = im.Scale("images/assets/flecha_prev2.png" , 200, 50)
@@ -160,3 +160,4 @@ label reclut:
     $ renpy.pause(.2)
     $ actual_page.setload(0)
     call screen reclut_shop with dissolve
+    jump jumper

@@ -19,10 +19,24 @@ screen mm_screen():
 screen mm_screen_help(txt="2"):
     text txt
 
+
+screen mm_screen_alpha:
+    textbutton "RECLUTAMIENTO" action Function(Jump_To, "reclut")
+
+image bg mm_lab = "/menu_backgrounds/mm_dia.png"
+
 label mm_lab:
-    call screen mm_screen
-    
+    # call screen mm_screen
+    show bg mm_lab with dissolve
+    call screen mm_screen_alpha
+    jump jumper
     # jump reclut
     # "HOLA"
 
 
+
+label jumper:
+    if jump_to.v == "reclut":
+        jump reclut
+    elif jump_to.v == "mm_lab":
+        jump mm_lab
