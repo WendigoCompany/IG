@@ -21,22 +21,18 @@ screen mm_screen_help(txt="2"):
 
 
 screen mm_screen_alpha:
-    textbutton "RECLUTAMIENTO" action Function(Jump_To, "reclut")
+    textbutton "RECLUTAMIENTO" action Function(Jump_To, "reclut") ypos 0
+    textbutton "DORMS" action Function(Jump_To, "dorms") ypos 100
 
 image bg mm_lab = "/menu_backgrounds/mm_dia.png"
 
 label mm_lab:
     # call screen mm_screen
+    hide image "/menu_backgrounds/obcs_50.png"
     show bg mm_lab with dissolve
     call screen mm_screen_alpha
-    jump jumper
+    # jump jumper
     # jump reclut
     # "HOLA"
 
 
-
-label jumper:
-    if jump_to.v == "reclut":
-        jump reclut
-    elif jump_to.v == "mm_lab":
-        jump mm_lab

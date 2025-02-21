@@ -9,14 +9,27 @@ init python:
     from game.pymodules.moduleClasses import SimpleVars
 
     def Jump_To(lab):
-        jump_to.setload(lab)
-        return ""
+        renpy.jump(lab)
+        # jump_to.setload(lab)
+        # return ""
 
 define e = Character("Eileen")
 
 define jump_to = SimpleVars()
 
 # The game starts here.
+
+
+
+# label jumper:
+#     $ renpy.jump(jump_to.v)
+    # if jump_to.v == "reclut":
+    #     jump reclut
+    # elif jump_to.v == "mm_lab":
+    #     jump mm_lab
+    # elif jump_to.v == "dorms":
+    #     $ renpy.jump("dorms")
+        
 
 label start:
     $ new_game()

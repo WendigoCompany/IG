@@ -8,7 +8,7 @@ define label_color  = '#cc0066'
 init python:
     from game.pymodules.translations import get_txt_db, set_lang
     import game.pymodules.texts.menu_txt
-
+    from game.pymodules.store_data import loaded
 
 
 
@@ -443,6 +443,9 @@ style navigation_button_text:
 ## https://www.renpy.org/doc/html/screen_special.html#main-menu
 
 screen main_menu():
+    ## Reset the loaded variable
+    $ loaded.setload(False)
+
 
     ## This ensures that any other menu screen is replaced.
     tag menu

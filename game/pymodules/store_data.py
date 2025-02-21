@@ -74,12 +74,15 @@ base_game ={
     "g_unlocked" : [0]
 }
 
+cache_game = SimpleVars()
+cache_game.v = base_game
+
 try:
     if renpy.game.persistent.game_store is None:
         renpy.game.persistent.game_store = {}
         print("Persistent creado!")
         
-    renpy.game.persistent.game_cache = {}
+    # renpy.game.persistent.game_cache = base_game
     print("Cache creado!")
 except Exception as pererror:
     print("ERROR CARGANDO PERMANENT")
@@ -87,14 +90,18 @@ except Exception as pererror:
 
 ############################################################################################################
 def get_store(key):
-    data = False
-    if renpy.game.persistent.game_cache.get(key):
+    # if renpy.game.persistent.game_cache.get(key):
+    #     if not key:
+    #         renpy.game.persistent.game_cache
+    #     return renpy.game.persistent.game_cache.get(key)
+    # else:
+    #     return None
+    if cache_game.v.get(key):
         if not key:
-            renpy.game.persistent.game_cache
-        return renpy.game.persistent.game_cache.get(key)
+            cache_game.v
+        return cache_game.v.get(key)
     else:
         return None
-
 ############################################################################################################
 
 old_save = copy.deepcopy(renpy.save)
@@ -103,13 +110,15 @@ old_save = copy.deepcopy(renpy.save)
 def new_save(*args, **kwargs):
     if renpy.game.persistent.game_store.get("saves") is None:
         renpy.game.persistent.game_store["saves"] = {
-            args[0]: renpy.game.persistent.game_cache
+            # args[0]: renpy.game.persistent.game_cache
+            args[0]: cache_game.v
             }
         
         old_save(args[0], **kwargs)
 
     else:
-        renpy.game.persistent.game_store["saves"].update({args[0]: renpy.game.persistent.game_cache})
+        # renpy.game.persistent.game_store["saves"].update({args[0]: renpy.game.persistent.game_cache})
+        renpy.game.persistent.game_store["saves"].update({args[0]: cache_game.v})
         old_save(args[0], **kwargs)
     renpy.save_persistent()
     return ""
@@ -130,7 +139,8 @@ old_load = copy.deepcopy(renpy.load)
 
 def new_load(*args, **kwargs):  
     loaded.setload(True)
-    renpy.game.persistent.game_cache = renpy.game.persistent.game_store["saves"].get(args[0])
+    # renpy.game.persistent.game_cache = renpy.game.persistent.game_store["saves"].get(args[0])
+    cache_game.setload(renpy.game.persistent.game_store["saves"].get(args[0]))
     old_load(args[0])
     return ""
 
@@ -142,5 +152,6 @@ renpy.load = new_load
 
 def new_game():
     if not loaded.v:
-        renpy.game.persistent.game_cache = base_game
+        # renpy.game.persistent.game_cache = base_game
+        cache_game.setload(base_game)
     loaded.setload(False)

@@ -1,19 +1,12 @@
 init python:
     from game.pymodules.moduleClasses import SimpleVars, l_filter
-    from game.girls.girls import girls_db
-    
+    from game.girls.functions import compare_girls_unlocked
+
     max_per_page= 9
     max_per_col= 3
     actual_page= SimpleVars()
     previewed_girl =SimpleVars()
-    previewed_girl.v =[-1]
-    def compare_girls_unlocked():
-        g_filtrated = []
-        for g in girls_db:
-            if not g["id"] in (get_store("g_unlocked")):
-                g_filtrated.append(g)
-        return g_filtrated
-
+    
     def filtrate_recl_girls():
         arr = []
         for  i,g in enumerate(compare_girls_unlocked()):
@@ -62,12 +55,11 @@ init python:
 style tx_button:
     color "#131212"
     size 10
-    # font "KGSorryNotSorryChub.ttf"
 
 define g_visible =[]
+
 screen reclut_shop(preview=False):
     add "/assets/reclutamiento4.png" xpos 300 ypos 100
-    # add "/assets/reclutamiento.png" xpos 300 ypos 100
     if not preview:
         $ g_visible = filtrate_recl_girls()
     
@@ -150,14 +142,15 @@ screen reclut_shop(preview=False):
                 ypos 129 + 10
                 action Function(recl_update_preview,2)
           
-image bg reclutamiento_bg1 = "/menu_backgrounds/bg_reclutamiento.png"
-image bg reclutamiento_bg2 = "/menu_backgrounds/bg_reclutamiento_2.png"
+
 
 label reclut:
+
+    image bg reclutamiento_bg1 = "/menu_backgrounds/bg_reclutamiento.png"
     show bg reclutamiento_bg1 with dissolve
     $ renpy.pause(.2)
-    show bg reclutamiento_bg2 with dissolve
+    show image "/menu_backgrounds/obcs_50.png" with dissolve
     $ renpy.pause(.2)
+    $ previewed_girl.setload([-1])
     $ actual_page.setload(0)
     call screen reclut_shop with dissolve
-    jump jumper
