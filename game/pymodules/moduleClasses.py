@@ -1,6 +1,8 @@
-class SimpleVars():
+class SimpleVars:
     v = None
-    def setload(self, value):
+    def __init__(self, defval =None):
+        self.v = defval
+    def setload(self,value):
         self.v = value
 
 

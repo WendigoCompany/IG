@@ -71,7 +71,14 @@ import copy
 
 
 base_game ={
-    "g_unlocked" : [0]
+    "g_unlocked" : [0],
+    "girls_data": [
+        {
+            "id" : 0,
+            "skins": [],
+            "s_params" : {},
+        }
+    ]
 }
 
 cache_game = SimpleVars()

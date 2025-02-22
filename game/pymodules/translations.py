@@ -20,11 +20,14 @@ def set_lang(lang):
 
 
 # ITERACIONES MULTIPLES => db = ["user"] , index=["k1","k2"]
-def get_txt_db(db, index):
+def get_txt_db(db, index, useTEXT=True):
     try:
         lang = get_lang()
      
-        holder = TEXTS.get(db)
+        if useTEXT:
+            holder = TEXTS.get(db)
+        else : 
+            holder = db
         if not holder:
             return "EMPTY"
         if type(index) == tuple or type(index) == list:
@@ -52,3 +55,39 @@ def get_txt_db(db, index):
 
     except Exception:
         return "ERROR MAIN"
+    
+
+# # ITERACIONES MULTIPLES => db = ["user"] , index=["k1","k2"]+
+# def get_txt(db, index):
+  
+#     try:
+#         lang = get_lang()
+     
+#         holder = db
+#         if not holder:
+#             return "EMPTY"
+#         if type(index) == tuple or type(index) == list:
+#             try:
+#                 for i in index:
+#                     holder = holder[i]
+
+#                 try:
+#                     return holder[lang]
+#                 except Exception:
+#                     return "ERROR LANG"
+
+#             except Exception as err:
+#                 print("********************************************")
+#                 print("Error in get_text: FUERA DE LUGAR")
+#                 print(err)
+#                 print("********************************************")
+#                 return "ERR"
+
+#         else:
+#             try:
+#                 return holder[index][lang]
+#             except Exception:
+#                 return "ERROR LANG2"
+
+#     except Exception:
+#         return "ERROR MAIN"

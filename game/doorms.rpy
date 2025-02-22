@@ -1,11 +1,20 @@
-init 1 python:
+init python:
     from game.girls.functions import compare_girls_locked
-    from game.pymodules.moduleClasses import SimpleVars
+    from game.pymodules.moduleClasses import SimpleVars , l_filter
+    from game.pymodules.translations import get_txt_db
+    from game.pymodules.texts.dormTXT import dorm_txt
+    
 
     doorms_max_per_col= 4
     doorms_max_per_page= doorms_max_per_col * 3
     doorms_actual_page= SimpleVars()
+    dorm_selected = SimpleVars(-1)
     
+    def dorm_call_girl(idg):
+        dorm_selected.setload(idg)
+        renpy.jump("ask_call_girl")
+
+
     def filtrate_dorms_girls():
         arr = []
         for  i,g in enumerate(compare_girls_locked(True)):
@@ -54,7 +63,7 @@ screen dorm_init_screen():
                 box_wrap True
                 imagebutton:
                     idle image
-                    action "sad"
+                    action Function(dorm_call_girl, g["id"])
                     ypos dorms_positon(i, "y")
                     xpos dorms_positon(i, "x")
                     hover image_hov
@@ -95,3 +104,18 @@ label dorms:
     show bg doorms_bg_init with dissolve
     show image "/menu_backgrounds/obcs_50.png" with dissolve
     call screen dorm_init_screen with dissolve
+
+label ask_call_girl:
+    $ found=  l_filter(compare_girls_locked(True), dorm_selected.v , "id")
+    menu:
+        "[get_txt_db(dorm_txt['questions']['call_girl'], 0, False)] [found['v']['name']] [get_txt_db(dorm_txt['questions']['call_girl'], 2, False)]" 
+        "[get_txt_db(dorm_txt['questions']['call_girl'], 1, False)]":
+            $ renpy.jump(found['v']['dorm']['start_label']  )
+            return ""
+        "No":
+            $ renpy.jump("dorms")
+            return ""
+        
+
+
+
