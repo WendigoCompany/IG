@@ -81,7 +81,8 @@ base_game ={
             "skins": [],
             "s_params" : {},
         }
-    ]
+    ],
+    "plname": "Wendigo2"
 }
 #PARTIDA BASE
 

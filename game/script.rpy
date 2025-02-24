@@ -15,8 +15,8 @@ init python:
         # jump_to.setload(lab)
         # return ""
 
-define e = Character("Eileen")
 
+define dorms_loop = False
 define jump_to = SimpleVars()
 
 # The game starts here.

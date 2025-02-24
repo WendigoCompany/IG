@@ -107,8 +107,9 @@ label dorms:
 
 label ask_call_girl:
     $ found=  l_filter(compare_girls_locked(True), dorm_selected.v , "id")
+    $ print(found['v'])
     menu:
-        "[get_txt_db(dorm_txt['questions']['call_girl'], 0, False)] [found['v']['name']] [get_txt_db(dorm_txt['questions']['call_girl'], 2, False)]" 
+        "[get_txt_db(dorm_txt['questions']['call_girl'], 0, False)] [found['v']['name']] ?" 
         "[get_txt_db(dorm_txt['questions']['call_girl'], 1, False)]":
             $ renpy.jump(found['v']['dorm']['start_label']  )
             return ""
