@@ -1,0 +1,3 @@
+# LOCALIZADOR
+def guide():
+    pass

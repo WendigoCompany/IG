@@ -35,7 +35,7 @@ define jump_to = SimpleVars()
 
 label start:
     $ new_game()
-    $ girl_exist()
+    # $ girl_exist()
     # # Show a background. This uses a placeholder by default, but you can
     # # add a file (named either "bg room.png" or "bg room.jpg") to the
     # # images directory to show it.
