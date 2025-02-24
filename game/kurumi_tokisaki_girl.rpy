@@ -17,6 +17,33 @@ label dorm_w_kurumi_tokisaki:
     pl "Bien, voy para alla."
 
 
+# label a2a21:
+#     menu:
+#         "Say Statement"
+#         "Choice 1":
+#             pass
+#             #block of code to run
+#         "Choice 2":
+#                 pass
+#             #block of code to run
+
+# label aa21:
+#     menu:
+#         "Say Statement"
+#         "Choice 3":
+#             pass
+#             #block of code to run
+#         "Choice 4":
+#                 pass
+#             #block of code to run
+
+screen cosa1 :
+    vbox:
+        textbutton "asd" action Function(Jump_To, "cosa3")
+        if dorms_loop:
+            textbutton "asd2" action Function(Jump_To, "cosa3")
+
+
 
 label dorm_inside_kurumi_tokisaki:
     scene bg kurumi_t_bg with dissolve
@@ -36,23 +63,20 @@ label dorm_inside_kurumi_tokisaki:
 
 
     if not dorms_loop:
-        kurumi_t "Buenos dias. ¿En que puedo ayudarlo?"
-        $ dorms_loop = True
+        # $ dorms_loop = True
         show kurumi_t SK0_PO1:
             xpos 1400
         with dissolve
-        menu optional_name:
-            "Say Statement"
-            "Choice 1":
-                pass
-                #block of code to run
-            "Choice 2":
-                pass
-                #block of code to run
-            
+        kurumi_t "Buenos dias. ¿En que puedo ayudarlo?"
+        call screen cosa1
+
     else:
         kurumi_t "Kiki. ¿Necesita algo mas?~"
-    jump dorm_inside_kurumi_tokisaki
+        call screen cosa1
 
 
 # im.Scale("bg/house.jpg", config.screen_width, config.screen_height),
+
+label cosa3:
+    $ dorms_loop = True
+    call screen cosa1

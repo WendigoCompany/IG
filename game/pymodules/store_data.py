@@ -204,3 +204,6 @@ def girl_exist():
 
 #VALIDAR QUE TODAS LAS CHICAS DESBLOQUEADAS ESTEN INSTALADAS
 ############################################################################################################
+
+
+print(inspect.getsource(renpy.show))
