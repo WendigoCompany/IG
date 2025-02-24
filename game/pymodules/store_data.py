@@ -65,13 +65,16 @@
 ############################################################################################################
 import renpy.exports as renpy
 from  game.pymodules.test  import see_module
-from  game.pymodules.moduleClasses  import SimpleVars
+from  game.pymodules.moduleClasses  import SimpleVars , l_filter
 import copy
+from game.girls.girlsDict import girls_dict
+import os
+import inspect
 
 
 
 base_game ={
-    "g_unlocked" : [0],
+    "g_unlocked" : [0,1],
     "girls_data": [
         {
             "id" : 0,
@@ -161,4 +164,44 @@ def new_game():
     if not loaded.v:
         # renpy.game.persistent.game_cache = base_game
         cache_game.setload(base_game)
+    girl_exist()
     loaded.setload(False)
+
+
+def filtrar(arr=[], tfo=None, inverso=False ):
+    newarr =[]
+    for a in arr:
+        if inverso:
+            if not a == tfo:
+                newarr.append(a)
+        else:
+            if a == tfo:
+                newarr.append(a)
+    return newarr
+
+def girl_exist():
+    route = inspect.getfile(girl_exist)
+    route_rpy = os.path.join(route , "../")
+    route_py = os.path.join(route_rpy , "./girls/")
+    stored = get_store("g_unlocked")
+    
+    # # Obtén la ruta del directorio actual
+    # directorio_actual = os.getcwd()
+
+    # Imprime la ruta del directorio actual
+    # print(f"Estás en el directorio: {directorio_actual}")
+
+
+
+    # rpy_files = os.listdir(route_rpy)
+    # py_files = os.listdir(route_py)
+
+    for gi in stored:
+        found = l_filter(girls_dict,gi,"id")
+        if not os.path.isfile(os.path.join(route_py + found["v"]["vitals"][0])):
+            cache_game.v["g_unlocked"] = filtrar(cache_game.v["g_unlocked"], gi , True)
+        elif not os.path.isfile(os.path.join(route_rpy + found["v"]["vitals"][1])):
+            cache_game.v["g_unlocked"] = filtrar(cache_game.v["g_unlocked"], gi , True)
+    
+    print(get_store("eg_unlocked"))
+        

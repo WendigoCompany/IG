@@ -5,9 +5,11 @@
 
 init python:
     from game.girls.girls import girls_db
-    from game.pymodules.store_data import get_store , new_game
+    from game.pymodules.store_data import get_store , new_game , girl_exist
     from game.pymodules.moduleClasses import SimpleVars
+    
 
+    # girl_exist()
     def Jump_To(lab):
         renpy.jump(lab)
         # jump_to.setload(lab)
@@ -33,7 +35,7 @@ define jump_to = SimpleVars()
 
 label start:
     $ new_game()
-    
+    $ girl_exist()
     # # Show a background. This uses a placeholder by default, but you can
     # # add a file (named either "bg room.png" or "bg room.jpg") to the
     # # images directory to show it.
