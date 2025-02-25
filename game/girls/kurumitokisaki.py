@@ -89,6 +89,32 @@ girls_db.append(
 )
 
 
+dorm_txt["girls"].update(
+    {
+        "1": {
+            "intro": [
+                {"en": "Good morning , Kurumi.", "es": "Buenos días, Kurumi."},
+                {"en": "Good morning, Mr ", "es": "Buenos días Sr "},
+                {"en": "What do you need?,", "es": "¿que necesita?"},
+                {
+                    "en": "I wanted to talk to you, are you free in your room?",
+                    "es": "Quería hablar contigo, ¿Estas libre en tu habitación?",
+                },
+                {"en": "Yes, you can come whenever you want.", "es": "Si, puede venir cuando desee."},
+                {"en": "Good, I'm on my way.", "es": "Bien, voy para allá."},
+            ],
+            "inside": [
+                {"en": "Good morning. What can I do for you?", "es": "Buenos días. ¿En que puedo ayudarlo?"},
+                {"en": "Kiki. Do you need anything else?~ ", "es": "Kiki. ¿Necesita algo mas?~"},
+            ],
+            "cb": [
+                {"en": "I hope you had a good time.", "es": "Espero que hayas pasado un buen rato."},
+                {"en": "I'll be waiting for you, until next time Mr ", "es": "Lo estare esperando , hasta la próxima Sr "},
+            ],
+        }
+    }
+)
+
 # girls_db.append(
 #     {
 #         "id": 3,
@@ -219,4 +245,4 @@ girls_db.append(
 # )
 
 
-dorm_txt["girls"].update({"0": {}})
+# dorm_txt["girls"].update({"1":{}})

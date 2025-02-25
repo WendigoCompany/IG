@@ -6,7 +6,7 @@ init offset = -1
 
 define label_color  = '#cc0066'
 init python:
-    from game.pymodules.translations import get_txt_db, set_lang
+    from game.pymodules.translations import get_txt_db, set_lang , get_lang
     import game.pymodules.texts.menu_txt
     from game.pymodules.store_data import loaded
 

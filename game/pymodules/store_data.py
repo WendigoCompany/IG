@@ -93,7 +93,7 @@ base_game = {
         },
         {
             "id": 1,
-            "skins": [3],
+            "skins": [0,4],
             "s_params": {},
             "actual_skin" : 0,
         },

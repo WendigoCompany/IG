@@ -5,8 +5,8 @@
 
 init python:
     from game.girls.girls import girls_db
-    from game.pymodules.store_data import get_store , new_game , girl_exist
-    from game.girls.functions import get_skins , get_actual_skin
+    from game.pymodules.store_data import get_store , new_game , girl_exist , cache_game
+    from game.girls.functions import  get_actual_skin
     from game.pymodules.moduleClasses import SimpleVars
     
 

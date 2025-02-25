@@ -20,13 +20,12 @@ def compare_girls_locked(rever=False):
 def get_skins(wid):
     myskins = get_store("girls_data")
     skins = l_filter(girls_db, wid, 'id')["v"]["skins"]
-    
     found = l_filter(myskins, wid , 'id')
+
     
 
 def get_actual_skin(wid):
     myskins = get_store("girls_data")
-    print(myskins, "myskins")
     return l_filter(myskins, wid, 'id')["v"]["actual_skin"]
 
     # for file in py_files:
