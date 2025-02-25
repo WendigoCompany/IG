@@ -24,7 +24,10 @@ def get_skins(wid):
     found = l_filter(myskins, wid , 'id')
     
 
-        
+def get_actual_skin(wid):
+    myskins = get_store("girls_data")
+    print(myskins, "myskins")
+    return l_filter(myskins, wid, 'id')["v"]["actual_skin"]
 
     # for file in py_files:
     #     if not os.path.isdir(route_py + file):

@@ -2,18 +2,23 @@ init python:
     import game.girls.kurumitokisaki
 
 #IMAGES
+
+default sk = 0
+default po = 0
+
 image bg kurumi_t_bg = "/images/menu_backgrounds/bg_doorms_1.png"
 
-image kurumi_t SK0_PO1 = "/images/sprays/kurumi_dorm_sk0_po0.png"
-image kurumi_t SK0_PO2 = "/images/sprays/kurumi_dorm_sk0_po1.png"
+image kurumi_t SK0_PO = "/images/sprays/kurumi_dorm_sk[sk]_po[po].png"
+# image kurumi_t SK0_PO1 = "/images/sprays/kurumi_dorm_sk0_po0.png"
+# image kurumi_t SK0_PO2 = "/images/sprays/kurumi_dorm_sk0_po1.png"
 
 
-image kurumi_t SK4_PO1 = "/images/sprays/kurumi_dorm_sk4_po0.png"
-image kurumi_t SK4_PO2 = "/images/sprays/kurumi_dorm_sk4_po1.png"
+# image kurumi_t SK4_PO1 = "/images/sprays/kurumi_dorm_sk4_po0.png"
+# image kurumi_t SK4_PO2 = "/images/sprays/kurumi_dorm_sk4_po1.png"
 
 
-image kurumi_t SK5_PO1 = "/images/sprays/kurumi_dorm_sk5_po0.png"
-image kurumi_t SK5_PO2 = "/images/sprays/kurumi_dorm_sk5_po1.png"
+# image kurumi_t SK5_PO1 = "/images/sprays/kurumi_dorm_sk5_po0.png"
+# image kurumi_t SK5_PO2 = "/images/sprays/kurumi_dorm_sk5_po1.png"
 
 
 
@@ -62,7 +67,9 @@ label dorm_inside_changing_kurumi_tokisaki:
 label dorm_inside_kurumi_tokisaki:
     $ shared_dorm_skin_jumper = "dorm_inside_changing_kurumi_tokisaki"
     scene bg kurumi_t_bg with dissolve
-    show kurumi_t SK0_PO2:
+    $ sk = get_actual_skin(1)
+    $ po = 1
+    show kurumi_t SK0_PO:
         xpos 1400
     with moveinright
     # fade, dissolve, pixellate, move,
@@ -80,18 +87,24 @@ label dorm_inside_kurumi_tokisaki:
     if not dorms_loop:
         # $ dorms_loop = True
         kurumi_t "Buenos dias. ¿En que puedo ayudarlo?"
-        show kurumi_t SK0_PO1:
+        $ sk = get_actual_skin(1)
+        $ po = 0
+        show kurumi_t SK0_PO:
             xpos 1400
         with dissolve
         $ dorms_loop = True
         call screen dorm_menu_1_kurumi_tokisaki with dissolve
 
     else:
-        show kurumi_t SK0_PO2:
+        $ sk = get_actual_skin(1)
+        $ po = 1
+        show kurumi_t SK0_PO:
             xpos 1400
         with dissolve
         kurumi_t "Kiki. ¿Necesita algo mas?~"
-        show kurumi_t SK0_PO1:
+        $ sk = get_actual_skin(1)
+        $ po = 0
+        show kurumi_t SK0_PO:
             xpos 1400
         with dissolve
         call screen dorm_menu_1_kurumi_tokisaki with dissolve
@@ -101,8 +114,9 @@ label dorm_inside_gb_kurumi_tokisaki:
     $ dorms_loop = False
     $ shared_dorm_skin_jumper = False
     $ shared_dorm_actual_skin = -1
-    
-    show kurumi_t SK0_PO2:
+    $ sk = get_actual_skin(1)
+    $ po = 1
+    show kurumi_t SK0_PO:    
         xpos 1400
     with dissolve
     kurumi_t "Espero que haiga pasado un buen rato."
