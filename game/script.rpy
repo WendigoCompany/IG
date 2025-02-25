@@ -6,8 +6,11 @@
 init python:
     from game.girls.girls import girls_db
     from game.pymodules.store_data import get_store , new_game , girl_exist
+    from game.girls.functions import get_skins
     from game.pymodules.moduleClasses import SimpleVars
     
+
+    get_skins(1)
 
     # girl_exist()
     def Jump_To(lab):
@@ -32,6 +35,15 @@ define jump_to = SimpleVars()
     # elif jump_to.v == "dorms":
     #     $ renpy.jump("dorms")
         
+
+style dorm_menu_button:
+    background "#006"
+    insensitive_background "#444"
+    hover_background "#00a"
+
+style dorm_menu_text:
+    color "#fff"
+    hover_color "#c3d"
 
 label start:
     $ new_game()

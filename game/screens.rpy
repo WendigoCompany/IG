@@ -937,24 +937,6 @@ screen preferences():
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
                     
-# init python:
-#     import inspect
-    
-#     print(inspect.getsource(renpy.save))
-
-#     def cosa():
-#         print("PUTA FUNCIONA ALGO!!")
-#         return ""
-#     renpy.save = cosa
-    
-# screen change_name_screen():
-#     tag menu
-
-#     use game_menu(_(menu_traslated["ChangeName"]), scroll="viewport"):
-#         vbox:
-#             label _("Introduce tu nuevo nombre:")
-#             input id "name_input"
-#             textbutton _("Guardar") action Function("")
 
 
 style pref_label is gui_label

@@ -17,6 +17,12 @@ def compare_girls_locked(rever=False):
         return g_filtrated
 
 
+def get_skins(wid):
+    myskins = get_store("girls_data")
+    skins = l_filter(girls_db, wid, 'id')["v"]["skins"]
+    
+    found = l_filter(myskins, wid , 'id')
+    
 
         
 

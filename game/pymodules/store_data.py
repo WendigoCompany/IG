@@ -64,47 +64,64 @@
 
 ############################################################################################################
 import renpy.exports as renpy
-from  game.pymodules.test  import see_module
-from  game.pymodules.moduleClasses  import SimpleVars , l_filter
+from game.pymodules.test import see_module
+from game.pymodules.moduleClasses import SimpleVars, l_filter
 import copy
 from game.girls.girlsDict import girls_dict
 import os
 import inspect
 from game.guide import guide
 
-#PARTIDA BASE
-base_game ={
-    "g_unlocked" : [0,1],
+# BASE WAIFU DATA TO ADD 
+#   "girls_data": 
+#         {
+#             "id": INT,
+#             "skins": [0],
+#             "s_params": {},
+#         },
+# BASE WAIFU DATA TO ADD 
+
+# PARTIDA BASE
+base_game = {
+    "g_unlocked": [0, 1],
     "girls_data": [
         {
-            "id" : 0,
+            "id": 0,
             "skins": [],
-            "s_params" : {},
-        }
+            "s_params": {},
+            "actual_skin" : 0,
+        },
+        {
+            "id": 1,
+            "skins": [3],
+            "s_params": {},
+            "actual_skin" : 0,
+        },
     ],
-    "plname": "Wendigo2"
+    "plname": "Wendigo2",
 }
-#PARTIDA BASE
+# PARTIDA BASE
 
-#CACHE PARTIDA ACTUAL
+# CACHE PARTIDA ACTUAL
 cache_game = SimpleVars()
 cache_game.v = base_game
-#CACHE PARTIDA ACTUAL
+# CACHE PARTIDA ACTUAL
 
 
 try:
     if renpy.game.persistent.game_store is None:
         renpy.game.persistent.game_store = {}
         print("Persistent creado!")
-        
+
     # renpy.game.persistent.game_cache = base_game
     print("Cache creado!")
 except Exception as pererror:
     print("ERROR CARGANDO PERMANENT")
     print(pererror)
 
+
 ############################################################################################################
-#BUSCAR EN LA CACHE
+# BUSCAR EN LA CACHE
 def get_store(key):
     # if renpy.game.persistent.game_cache.get(key):
     #     if not key:
@@ -118,9 +135,11 @@ def get_store(key):
         return cache_game.v.get(key)
     else:
         return None
-#BUSCAR EN LA CACHE
+
+
+# BUSCAR EN LA CACHE
 ############################################################################################################
-#REESCRITURA DEL METODO SAVE
+# REESCRITURA DEL METODO SAVE
 old_save = copy.deepcopy(renpy.save)
 
 
@@ -129,8 +148,8 @@ def new_save(*args, **kwargs):
         renpy.game.persistent.game_store["saves"] = {
             # args[0]: renpy.game.persistent.game_cache
             args[0]: cache_game.v
-            }
-        
+        }
+
         old_save(args[0], **kwargs)
 
     else:
@@ -144,17 +163,18 @@ def new_save(*args, **kwargs):
 # auto
 renpy.save = new_save
 
-#REESCRITURA DEL METODO SAVE
+# REESCRITURA DEL METODO SAVE
 ############################################################################################################
 
 
-#REESCRITURA DEL METODO LOAD
+# REESCRITURA DEL METODO LOAD
 loaded = SimpleVars()
 
 
 old_load = copy.deepcopy(renpy.load)
 
-def new_load(*args, **kwargs):  
+
+def new_load(*args, **kwargs):
     loaded.setload(True)
     # renpy.game.persistent.game_cache = renpy.game.persistent.game_store["saves"].get(args[0])
     cache_game.setload(renpy.game.persistent.game_store["saves"].get(args[0]))
@@ -164,10 +184,11 @@ def new_load(*args, **kwargs):
 
 
 renpy.load = new_load
-#REESCRITURA DEL METODO LOAD
+# REESCRITURA DEL METODO LOAD
+
 
 ############################################################################################################
-#VALIDAR NUEVA PARTIDA
+# VALIDAR NUEVA PARTIDA
 def new_game():
     if not loaded.v:
         # renpy.game.persistent.game_cache = base_game
@@ -175,11 +196,12 @@ def new_game():
     girl_exist()
     loaded.setload(False)
 
-#VALIDAR NUEVA PARTIDA
+
+# VALIDAR NUEVA PARTIDA
 ############################################################################################################
-#VALIDAR QUE TODAS LAS CHICAS DESBLOQUEADAS ESTEN INSTALADAS
-def filtrar(arr=[], tfo=None, inverso=False ):
-    newarr =[]
+# VALIDAR QUE TODAS LAS CHICAS DESBLOQUEADAS ESTEN INSTALADAS
+def filtrar(arr=[], tfo=None, inverso=False):
+    newarr = []
     for a in arr:
         if inverso:
             if not a == tfo:
@@ -189,21 +211,23 @@ def filtrar(arr=[], tfo=None, inverso=False ):
                 newarr.append(a)
     return newarr
 
+
 def girl_exist():
     route = inspect.getfile(guide).replace("guide.py", "").replace("\\", "/")
     route_rpy = route
     route_py = route_rpy + "girls/"
     stored = get_store("g_unlocked")
-    
-    for gi in stored:
-        found = l_filter(girls_dict,gi,"id")
-        if not os.path.isfile(os.path.join(route_py + found["v"]["vitals"][0])):
-            cache_game.v["g_unlocked"] = filtrar(cache_game.v["g_unlocked"], gi , True)
-        elif not os.path.isfile(os.path.join(route_rpy + found["v"]["vitals"][1])):
-            cache_game.v["g_unlocked"] = filtrar(cache_game.v["g_unlocked"], gi , True)
 
-#VALIDAR QUE TODAS LAS CHICAS DESBLOQUEADAS ESTEN INSTALADAS
+    for gi in stored:
+        found = l_filter(girls_dict, gi, "id")
+        if not os.path.isfile(os.path.join(route_py + found["v"]["vitals"][0])):
+            cache_game.v["g_unlocked"] = filtrar(cache_game.v["g_unlocked"], gi, True)
+        elif not os.path.isfile(os.path.join(route_rpy + found["v"]["vitals"][1])):
+            cache_game.v["g_unlocked"] = filtrar(cache_game.v["g_unlocked"], gi, True)
+
+
+# VALIDAR QUE TODAS LAS CHICAS DESBLOQUEADAS ESTEN INSTALADAS
 ############################################################################################################
 
 
-print(inspect.getsource(renpy.show))
+# print(inspect.getsource(renpy.show))

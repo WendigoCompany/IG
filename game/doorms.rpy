@@ -54,7 +54,6 @@ init python:
 screen dorm_init_screen():
     add "/assets/reclutamiento4.png" xpos 300 ypos 100
     $ g_visible = filtrate_dorms_girls()
-    $ print(g_visible)
     vbox:
         for i,g  in enumerate(g_visible):
             $ image = im.Scale("images/profiles/" + g["reclut"]["s_pre_img"][0], 200, 200)
@@ -107,7 +106,6 @@ label dorms:
 
 label ask_call_girl:
     $ found=  l_filter(compare_girls_locked(True), dorm_selected.v , "id")
-    $ print(found['v'])
     menu:
         "[get_txt_db(dorm_txt['questions']['call_girl'], 0, False)] [found['v']['name']] ?" 
         "[get_txt_db(dorm_txt['questions']['call_girl'], 1, False)]":
